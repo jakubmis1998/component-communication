@@ -1,0 +1,8 @@
+<h4>Home component</h4>
+
+<input #inputRef (keyup)="onKeyUp($event)">
+<p><small>{{ messageToSend }}</small></p>
+
+<button (click)="sendMessageViaOutput()" class="btn btn-primary mr-1">Send Message via OutPut</button>
+<button (click)="sendMessageViaSubject()" class="btn btn-primary mr-1">Send Message via Subject</button>
+<button (click)="clearMessages(inputRef)" class="btn btn-secondary ml-1">Clear Messages</button>
