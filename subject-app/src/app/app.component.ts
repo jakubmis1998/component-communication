@@ -2,6 +2,7 @@ import { Component, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { MessageService } from './message.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -18,12 +19,13 @@ export class AppComponent implements OnDestroy {
   @HostListener('window:keydown', ['$event'])
   onKeyDown(event) {
     if (event.key === "Delete") {
+      this.toastr.info('Messages deleted!', 'Info!');
       this.messageService.clearMessages();
       this.parentMessageNumber = 1;
     }
   }
 
-  constructor(private messageService: MessageService) {
+  constructor(private messageService: MessageService, private toastr: ToastrService) {
     // subscribe to home component messages
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
