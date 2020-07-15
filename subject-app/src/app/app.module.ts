@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 
 import { ToastrModule } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
+import { MatBadgeModule } from '@angular/material/badge';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { MatButtonModule } from '@angular/material/button';
       positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),
-    MatButtonModule
+    MatButtonModule,
+    MatBadgeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

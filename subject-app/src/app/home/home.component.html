@@ -1,10 +1,14 @@
-<h4>Home component</h4>
+<div class="addMessageContainer">
+    <h4 class="hTag" [matBadge]="childMessageNumber - 1" matBadgeOverlap="false">Home component</h4>
 
-<div class="mb-3">
-    <input #inputRef (keyup)="onKeyUp($event)">
-    <p *ngIf="messageToSend"><small>You will send: "{{ messageToSend }}" to App Component</small></p>
+    <div class="typeInput mb-3">
+        <input placeholder="Type a message..." #inputRef (keyup)="onKeyUp($event)">
+        <p *ngIf="messageToSend"><small>You will send: "{{ messageToSend }}" to App Component</small></p>
+    </div>
 </div>
-
-<button mat-raised-button (click)="sendMessageViaOutput()" color="primary" class="btn mr-1">Send Message via OutPut</button>
-<button mat-raised-button (click)="sendMessageViaSubject()" color="primary" class="btn mr-1 ml-1">Send Message via Subject</button>
-<button mat-raised-button (click)="clearMessages(inputRef)" color="warn" class="btn ml-1">Clear Messages</button>
+<button mat-raised-button (click)="sendMessageViaOutput()" color="primary"
+    class="btn mr-1">Send Message via OutPut</button>
+<button mat-raised-button (click)="sendMessageViaSubject()" color="primary"
+    class="btn mr-1 ml-1">Send Message via Subject</button>
+<button mat-raised-button (click)="clearMessages(inputRef)" color="warn"
+    class="btn ml-1">Clear Messages</button>
