@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { MessageService } from './message.service';
@@ -13,6 +13,15 @@ export class AppComponent implements OnDestroy {
   messages: string[] = [];
   parentMessageNumber: number = 1;
   subscription: Subscription;
+
+  // KeyUp event on whole window - globally
+  @HostListener('window:keydown', ['$event'])
+  onKeyDown(event) {
+    if (event.key === "Delete") {
+      this.messageService.clearMessages();
+      this.parentMessageNumber = 1;
+    }
+  }
 
   constructor(private messageService: MessageService) {
     // subscribe to home component messages

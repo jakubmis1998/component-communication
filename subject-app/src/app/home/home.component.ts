@@ -19,14 +19,18 @@ export class HomeComponent {
 
   sendMessageViaOutput(): void {
     // send message through Output to parent
-    this.toastr.success('Message sent via Output!', 'Success!');
-    this.messageToSendOutput.emit(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through Output - sending message value
+    if (this.messageToSend) {
+      this.toastr.success('Message sent via Output!', 'Success!');
+      this.messageToSendOutput.emit(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through Output - sending message value
+    }
   }
 
   sendMessageViaSubject(): void {
     // send message to subscribers via observable subject
-    this.toastr.success('Message sent via Subject!', 'Success!');
-    this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value
+    if (this.messageToSend) {
+      this.toastr.success('Message sent via Subject!', 'Success!');
+      this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value
+    }
   }
 
   clearMessages(inputRef): void {
@@ -39,6 +43,10 @@ export class HomeComponent {
 
   onKeyUp(event: any) {
     this.messageToSend = event.target.value;
+    if (event.key === "Enter" && this.messageToSend) {
+        this.toastr.success('Message sent via Subject by press Enter!', 'Success!');
+        this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value by press enter
+    }
   }
 
 }
