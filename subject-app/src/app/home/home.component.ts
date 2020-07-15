@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HomeComponent {
 
-  messageToSend: string = '';
+  messageToSend: string;
   @Output() messageToSendOutput = new EventEmitter<string>();
 
   constructor(private messageService: MessageService, private toastr: ToastrService) { }
@@ -30,7 +30,7 @@ export class HomeComponent {
 
   clearMessages(inputRef): void {
     // clear messages
-    this.toastr.warning('Messages deleted!', 'Success!');
+    this.toastr.info('Messages deleted!', 'Info!');
     this.messageService.clearMessages();
     this.messageToSend = '';
     inputRef.value = '';
