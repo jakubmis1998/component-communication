@@ -11,6 +11,7 @@ import { MessageService } from './message.service';
 })
 export class AppComponent implements OnDestroy {
   messages: string[] = [];
+  parentMessageNumber: number = 1;
   subscription: Subscription;
 
   constructor(private messageService: MessageService) {
@@ -18,9 +19,11 @@ export class AppComponent implements OnDestroy {
     this.subscription = this.messageService.getMessage().subscribe(message => {
       if (message) {
         this.messages.push(message);
+        this.parentMessageNumber++;
       } else {
         // clear messages when empty message received
         this.messages = [];
+        this.parentMessageNumber = 1;
       }
     });
   }
@@ -31,6 +34,7 @@ export class AppComponent implements OnDestroy {
   }
 
   onNewMessage(newMessage: string) {
-    this.messages.push(newMessage)
+    if (newMessage) this.messages.push(newMessage)
+    this.parentMessageNumber++;
   }
 }

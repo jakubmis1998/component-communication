@@ -6,7 +6,8 @@
                 <div *ngFor="let message of messages" class="alert alert-success">{{message}}</div>
                 <!-- Home component -->
                 <!-- <router-outlet></router-outlet> -->
-                <app-home (messageToSendOutput)="onNewMessage($event)"></app-home> <!-- Child field name, parent fun name -->
+                <!--Parent field name(input) Child field name(output), parent fun name -->
+                <app-home [childMessageNumber]="parentMessageNumber" (messageToSendOutput)="onNewMessage($event)"></app-home>
             </div>
         </div>
     </div>

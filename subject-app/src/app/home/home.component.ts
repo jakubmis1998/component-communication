@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { MessageService } from '../message.service';
 import { ToastrService } from 'ngx-toastr';
@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent {
 
   messageToSend: string;
+  @Input() childMessageNumber: number;
   @Output() messageToSendOutput = new EventEmitter<string>();
 
   constructor(private messageService: MessageService, private toastr: ToastrService) { }
@@ -19,13 +20,13 @@ export class HomeComponent {
   sendMessageViaOutput(): void {
     // send message through Output to parent
     this.toastr.success('Message sent via Output!', 'Success!');
-    this.messageToSendOutput.emit(this.messageToSend); // Through Output - sending message value
+    this.messageToSendOutput.emit(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through Output - sending message value
   }
 
   sendMessageViaSubject(): void {
     // send message to subscribers via observable subject
     this.toastr.success('Message sent via Subject!', 'Success!');
-    this.messageService.sendMessage(this.messageToSend); // Through subject - sending message value
+    this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value
   }
 
   clearMessages(inputRef): void {
