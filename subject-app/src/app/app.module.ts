@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { ToastrModule } from 'ngx-toastr';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -22,6 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-bottom-center',
       preventDuplicates: true,
     }),
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
