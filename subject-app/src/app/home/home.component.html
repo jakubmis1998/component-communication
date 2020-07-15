@@ -1,9 +1,9 @@
 <div class="addMessageContainer">
-    <h4 class="hTag" [matBadge]="childMessageNumber - 1" matBadgeOverlap="false">Home component</h4>
+    <h4 class="hTag" [matBadge]="childMessageNumber - 1" matBadgeOverlap="false">Child component</h4>
 
-    <div class="typeInput mb-3">
+    <div class="mb-3 w-100">
         <input placeholder="Type a message..." #inputRef (keyup)="onKeyUp($event)">
-        <p *ngIf="messageToSend"><small>You will send: "{{ messageToSend }}" to App Component</small></p>
+        <p *ngIf="messageToSend"><small>You will send: "{{ messageToSend }}" to Parent Component</small></p>
     </div>
 </div>
 <button mat-raised-button (click)="sendMessageViaOutput()" color="primary"

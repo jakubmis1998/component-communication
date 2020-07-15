@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 import { MessageService } from '../message.service';
 import { ToastrService } from 'ngx-toastr';
@@ -14,6 +14,7 @@ export class HomeComponent {
   messageToSend: string;
   @Input() childMessageNumber: number;
   @Output() messageToSendOutput = new EventEmitter<string>();
+  @ViewChild('inputRef') inputRef: ElementRef;
 
   constructor(private messageService: MessageService, private toastr: ToastrService) { }
 
@@ -22,6 +23,7 @@ export class HomeComponent {
     if (this.messageToSend) {
       this.toastr.success('Message sent via Output!', 'Success!');
       this.messageToSendOutput.emit(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through Output - sending message value
+      this.clearInput();
     }
   }
 
@@ -30,6 +32,7 @@ export class HomeComponent {
     if (this.messageToSend) {
       this.toastr.success('Message sent via Subject!', 'Success!');
       this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value
+      this.clearInput();
     }
   }
 
@@ -37,8 +40,7 @@ export class HomeComponent {
     // clear messages
     this.toastr.info('Messages deleted!', 'Info!');
     this.messageService.clearMessages();
-    this.messageToSend = '';
-    inputRef.value = '';
+    this.clearInput();
   }
 
   onKeyUp(event: any) {
@@ -46,7 +48,12 @@ export class HomeComponent {
     if (event.key === "Enter" && this.messageToSend) {
         this.toastr.success('Message sent via Subject by press Enter!', 'Success!');
         this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value by press enter
-    }
+        this.clearInput();
+      }
   }
 
+  clearInput() {
+    this.messageToSend = '';
+    this.inputRef.nativeElement.value = '';
+  }
 }
