@@ -36,14 +36,14 @@ export class HomeComponent {
     }
   }
 
-  clearMessages(inputRef): void {
+  clearMessages(): void {
     // clear messages
     this.toastr.info('Messages deleted!', 'Info!');
     this.messageService.clearMessages();
     this.clearInput();
   }
 
-  onKeyUp(event: any) {
+  onKeyUp(event: any): void {
     this.messageToSend = event.target.value;
     if (event.key === "Enter" && this.messageToSend) {
         this.toastr.success('Message sent via Subject by press Enter!', 'Success!');
@@ -52,7 +52,7 @@ export class HomeComponent {
       }
   }
 
-  clearInput() {
+  clearInput(): void {
     this.messageToSend = '';
     this.inputRef.nativeElement.value = '';
   }
