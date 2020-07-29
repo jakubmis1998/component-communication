@@ -1,5 +1,5 @@
 <div class="addMessageContainer">
-    <h4 class="hTag" [matBadge]="childMessageNumber - 1" matBadgeOverlap="false">Child component</h4>
+    <h4 [matBadge]="childMessageNumber - 1" matBadgeOverlap="false">Child component</h4>
 
     <div class="mb-3 w-100">
         <input placeholder="Type a message..." #inputRef (keyup)="onKeyUp($event)">
@@ -12,3 +12,4 @@
     class="btn mr-1 ml-1">Send Message via Subject</button>
 <button mat-raised-button (click)="clearMessages()" color="warn"
     class="btn ml-1">Clear Messages</button>
+

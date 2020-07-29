@@ -1,0 +1,13 @@
+::ng-deep .custom-dialog {
+    .mat-dialog-container {
+        background-color: rgb(234, 243, 234);
+    }
+    .mat-dialog-content {
+        text-align: center;
+        opacity: 0.5;
+        padding: 5px;
+        margin-bottom: 10px;
+        background-color: rgb(92, 255, 187);
+    }
+}
+

@@ -9,12 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { ToastrModule } from 'ngx-toastr';
 import { MatButtonModule } from '@angular/material/button';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogComponent } from './dialog/dialog.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +29,8 @@ import { MatBadgeModule } from '@angular/material/badge';
       preventDuplicates: true,
     }),
     MatButtonModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

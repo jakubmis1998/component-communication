@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class HomeComponent {
 
   messageToSend: string;
+  lastMessage: string = '';
   @Input() childMessageNumber: number;
   @Output() messageToSendOutput = new EventEmitter<string>();
   @ViewChild('inputRef') inputRef: ElementRef;
@@ -21,6 +22,7 @@ export class HomeComponent {
   sendMessageViaOutput(): void {
     // send message through Output to parent
     if (this.messageToSend) {
+      this.lastMessage = this.messageToSend;
       this.toastr.success('Message sent via Output!', 'Success!');
       this.messageToSendOutput.emit(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through Output - sending message value
       this.clearInput();
@@ -30,6 +32,7 @@ export class HomeComponent {
   sendMessageViaSubject(): void {
     // send message to subscribers via observable subject
     if (this.messageToSend) {
+      this.lastMessage = this.messageToSend;
       this.toastr.success('Message sent via Subject!', 'Success!');
       this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value
       this.clearInput();
@@ -46,6 +49,7 @@ export class HomeComponent {
   onKeyUp(event: any): void {
     this.messageToSend = event.target.value;
     if (event.key === "Enter" && this.messageToSend) {
+      this.lastMessage = this.messageToSend;
         this.toastr.success('Message sent via Subject by press Enter!', 'Success!');
         this.messageService.sendMessage(this.childMessageNumber.toString() + ") " + this.messageToSend); // Through subject - sending message value by press enter
         this.clearInput();
@@ -55,5 +59,9 @@ export class HomeComponent {
   clearInput(): void {
     this.messageToSend = '';
     this.inputRef.nativeElement.value = '';
+  }
+
+  getLastMessage(): string {
+    return this.lastMessage;
   }
 }
