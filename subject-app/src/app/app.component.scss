@@ -1,3 +1,11 @@
+::ng-deep body {
+    border: 5px dashed blue;
+}
+
+.parent {
+    color: blue;
+}
+
 ::ng-deep .custom-dialog {
     .mat-dialog-container {
         background-color: rgb(234, 243, 234);
