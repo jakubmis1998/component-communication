@@ -1,5 +1,5 @@
 import { Component, OnDestroy, HostListener, ViewChild } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { fromEvent, Subscription, Observable } from 'rxjs';
 
 import { MessageService } from './message.service';
 import { ToastrService } from 'ngx-toastr';
@@ -18,6 +18,9 @@ export class AppComponent implements OnDestroy {
   messages: string[] = [];
   parentMessageNumber: number = 1;
   subscription: Subscription;
+  mouseSubscription: Subscription;
+  mouseObservable: Observable<any>;
+  discoPartyWorks: boolean = true;
   @ViewChild(HomeComponent) homeComponent: HomeComponent;
 
   constructor(private messageService: MessageService, private toastr: ToastrService, public dialog: MatDialog) {
@@ -32,6 +35,16 @@ export class AppComponent implements OnDestroy {
         this.parentMessageNumber = 1;
       }
     });
+
+    // When mouse is moving, every 0.5s change the color of background
+    setInterval(() => {
+      if (this.discoPartyWorks)
+        document.body.style.backgroundColor = this.getRandomColor();
+    }, 500);
+    this.mouseObservable = fromEvent(document.body, 'mousemove');
+    this.mouseSubscription = this.mouseObservable.subscribe((event: MouseEvent) => {
+      this.discoPartyWorks = true;
+    });
   }
 
   // KeyUp event on whole window - globally
@@ -42,6 +55,18 @@ export class AppComponent implements OnDestroy {
       this.messageService.clearMessages();
       this.parentMessageNumber = 1;
     }
+  }
+
+  startDisco() {
+    if (this.mouseSubscription.closed) {
+      this.mouseSubscription = this.mouseObservable.subscribe((event: MouseEvent) => {
+        this.discoPartyWorks = true;
+      });
+    }
+  }
+
+  stopDisco() {
+    this.mouseSubscription.unsubscribe();
   }
 
   ngOnDestroy(): void {
@@ -60,5 +85,16 @@ export class AppComponent implements OnDestroy {
       data: { lastMessage: this.homeComponent.getLastMessage() },
       panelClass: 'custom-dialog'
     });
+  }
+
+  getRandomColor(): string {
+    this.discoPartyWorks = false;
+
+    const letters = '0123456789ABCDEF';
+    let randomHexColor = '#';
+    for (let i = 0; i < 6; i++) {
+      randomHexColor += letters[(Math.floor(Math.random() * 16))];
+    }
+    return randomHexColor;
   }
 }

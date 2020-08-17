@@ -1,5 +1,6 @@
 ::ng-deep body {
     border: 5px dashed blue;
+    transition: 0.5s;
 }
 
 .parent {
@@ -17,5 +18,39 @@
         margin-bottom: 10px;
         background-color: rgb(92, 255, 187);
     }
+}
+
+.stop {
+    p {
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        font-weight: bold;
+        font-size: 25px;
+        bottom: 15%;
+        color: white;
+        position: absolute;
+    }
+    background-color: rgb(97, 94, 94);
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.start {
+    p {
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+        font-weight: bold;
+        font-size: 25px;
+        bottom: 15%;
+        color: white;
+        position: absolute;
+    }
+    background-color: rgb(97, 94, 94);
+    width: 100px;
+    height: 100%;
+    position: absolute;
+    right: 0;
 }
 
